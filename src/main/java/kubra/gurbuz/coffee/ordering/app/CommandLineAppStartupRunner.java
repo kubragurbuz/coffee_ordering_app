@@ -38,6 +38,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         //ikinci commit de istenilen mesajı buraya yazacağım servise de vereceğim
         scanner.close();
         System.out.println("Teşekkürler kahveniz hazırlanıyor.");
+        coffeeEntities.get(0).getMessage();
         System.exit(0);
       } else {  //ard arda hatalı giriş yapan veri varsa hata mesajı verip konsoldan tekrar giriş yapmasını istiyoruz
         errorMessage();

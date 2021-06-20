@@ -77,4 +77,28 @@ public class CoffeeEntity {
     this.coffeeMaterialRelEntities = coffeeMaterialRelEntities;
   }
 
+  public void getMessage() {
+    String coffeeMessage;
+    List<String> selectedCoffee = new ArrayList<>();
+
+    //seçilen kahvenin içerisinde kullanılan malzemeleri liste içerisine ekliyor
+    getCoffeeMaterialRelEntities().forEach(pr -> selectedCoffee.add( pr.getMeasure() + " doz " + pr.getMaterial().getName()));
+
+    // Kahve birden fazla içerikten oluşuyorsa içerikleri birbirine bağlıyoruz
+    if(getCoffeeMaterialRelEntities().size() > 1) {
+      coffeeMessage = String.join(", ", selectedCoffee.subList(0, selectedCoffee.size() - 1))
+          + " ve " + selectedCoffee.get(selectedCoffee.size() - 1);
+
+      setMessage(coffeeMessage);
+    } else if (getCoffeeMaterialRelEntities().size() == 1) {  //kahve tek içerikten oluşuyorsa
+      coffeeMessage = selectedCoffee.get(0);
+      setMessage(coffeeMessage);
+    } else {  // kahve içeriği bulunamadıysa
+      System.out.println("Kahve içeriği oluşturulamadı!");
+    }
+  }
+
+  private void setMessage(String coffeeMessage) {
+    System.out.println(getName() + " seçtiniz. Bu içeceğimiz " + coffeeMessage  + " içermektedir. Afiyet Olsun.");
+  }
 }
