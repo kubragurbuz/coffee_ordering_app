@@ -29,18 +29,16 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     Scanner scanner = new Scanner(System.in);
 
-    // integer dışında bir giriş oldu ise
-    while (!scanner.hasNextInt()) {
-      scanner.next();
-      errorMessage();
-    }
-
     while (scanner.hasNextInt()) {
       Integer coffeNumber = scanner.nextInt();
       // Konsoldan girilen kahve numarası geçerli mi diye kontrol ediyor
       List<CoffeeEntity> coffeeEntities = entities.stream().filter(coffeeEntity -> coffeeEntity.getId().equals(coffeNumber)).collect(Collectors.toList());
+
       if (coffeeEntities.size() > 0) {
-        break;
+        //ikinci commit de istenilen mesajı buraya yazacağım servise de vereceğim
+        scanner.close();
+        System.out.println("Teşekkürler kahveniz hazırlanıyor.");
+        System.exit(0);
       } else {  //ard arda hatalı giriş yapan veri varsa hata mesajı verip konsoldan tekrar giriş yapmasını istiyoruz
         errorMessage();
       }
