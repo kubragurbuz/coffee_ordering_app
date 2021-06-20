@@ -18,4 +18,13 @@ public class CoffeeService {
     return coffeeRepository.findAll();
   }
 
+  public List<CoffeeEntity> writeCoffeeListConsole() {
+    // DB de kaydedilmiş tüm aktif kullanılan kahve listesini döner
+    List<CoffeeEntity> entities = this.getAllCoffee();
+    // Konsola kahve listesindeki özellikleri istenilen formatta yazar
+    entities.forEach(entity ->
+        System.out.println(entity.getId() + ". " + entity.getName() + "(" + entity.getPrice() + entity.getCur().getSymbol() + ")"));
+    return entities;
+  }
+
 }

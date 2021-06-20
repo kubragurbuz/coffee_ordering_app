@@ -4,6 +4,7 @@ import kubra.gurbuz.coffee.ordering.app.entity.CoffeeEntity;
 import kubra.gurbuz.coffee.ordering.app.service.CoffeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @Component
+@Profile("!test")
 public class CommandLineAppStartupRunner implements CommandLineRunner {
 
   @Autowired
@@ -19,12 +21,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
 
-    // DB de kaydedilmiş tüm aktif kullanılan kahve listesini döner
-    List<CoffeeEntity> entities = service.getAllCoffee();
-    // Konsola kahve listesindeki özellikleri istenilen formatta yazar
-    entities.forEach(entity ->
-        System.out.println(entity.getId() + ". " + entity.getName() + "(" + entity.getPrice() + entity.getCur().getSymbol() + ")"));
-
+    List<CoffeeEntity> entities = service.writeCoffeeListConsole();
     System.out.println("Lütfen içmek istediğiniz kahvenin numarasını giriniz");
 
     Scanner scanner = new Scanner(System.in);

@@ -16,7 +16,7 @@ public class CoffeeEntity {
   private Integer id;
 
   private String name;
-  private String price;
+  private Integer price;
 
   @ManyToOne
   @JoinColumn(name = "cur_id")
@@ -60,11 +60,11 @@ public class CoffeeEntity {
     this.isActv = isActv;
   }
 
-  public String getPrice() {
+  public Integer getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(Integer price) {
     this.price = price;
   }
 
